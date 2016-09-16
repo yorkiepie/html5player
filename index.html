@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>HTML5 Video Interface with Chapters</title>
+    
+    
+    
+    
+        <link rel="stylesheet" href="css/style.css">
+
+    
+    
+    
+  </head>
+
+  <body>
+
+    <div class="accordion">
+  <!--<h1>Video Title Here</h1>-->
+<ul class="accordion firstul">
+  <li>
+    <a class="toggle" href="javascript:void(0);">Controls</a>
+    <ul class="first">
+      <li><button id="playme">Play/Pause</button></li>
+      <li><button id="restart">Restart</button></li>
+    </ul>
+  </li>
+  <li>
+    <a class="toggle" href="javascript:void(0);">HDR</a>
+    <ul class="first">
+      <li><button id="chapt1">1b_RM_CO3_HDR_Clip1_22M.mp4</button></li>
+    </ul>
+  </li>
+  <li>
+    <a class="toggle" href="javascript:void(0);">SDR</a>
+    <ul class="first">
+      <li>
+        <a href="#" class="inner-toggle">1a_RM_SDR_Clip1.mxf</a>
+        <ul class="inner">
+          <li><button id="chapt2">Overview</button></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#" class="inner-toggle">1a_RM_SDR_Clip2.mxf</a>
+        <ul class="inner">
+          <li><button id="chapt3">Overview</button></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+  <!--<img src="http://demo.thesisawesome.com/site/blogskin/files/2012/10/your-logo-here.png" class="logo">-->
+  <img src="http://discovery.digitalshowcase.piksel.com/i/brand-logo.png" class="logo">
+</div>
+<div class="accordion2">
+  <video id="myvideo" controls>
+      <source src="http://cdn-origin-discovery.digitalshowcase.piksel.com/trailers/2015/nightmares_9_full_newffmpegversion.mp4" type="video/mp4"></source>
+      Your browser does not support HTML5 video.
+  </video>
+<div class="shadow"></div>
+</div>
+<div style="clear:both"></div>
+<div class="info">
+  Copyright &copy;
+  <script type="text/javascript">
+    var d = new Date()
+    document.write(d.getFullYear())
+  </script>
+  <a href="http://www.piksel.com" target="_blank">Piksel Inc.</a>
+</div>
+<!--<a href="#" onclick="MyWindow=window.open('http://codepen.io/npsantini/full/ogJBjq/','MyWindow','toolbar=no,location=no,directories=no,status=no, menubar=no,scrollbars=no,resizable=no,width=770,height=380'); return false;">Open Video In New Tab</a>-->
+<!--[if gte IE 9]>
+  <style type="text/css">
+    .gradient {
+       filter: none;
+    }
+  </style>
+<![endif]-->
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+        <script src="js/index.js"></script>
+
+    
+    
+    
+  </body>
+</html>
