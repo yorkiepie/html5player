@@ -11,16 +11,8 @@ $('.toggle, .inner-toggle').click(function(e) {
         $this.next().slideToggle(350);
     }
 });
-videojs.autoSetup();
 
-    videojs('myvideo').ready(function(){
-      console.log(this.options()); //log all of the default videojs options
-      
-       // Store the video object
-      var myPlayer = this, id = myPlayer.id();
-      
-    });
-var myvideo = myPlayer,
+var myvideo = document.getElementById('myvideo'),
     playbutton = document.getElementById('playme'),
     restart = document.getElementById('restart'),
     chapt1 = document.getElementById('chapt1'),
@@ -29,6 +21,9 @@ var myvideo = myPlayer,
 
 chapt1.addEventListener("click", function (event) {
     event.preventDefault();
+    myvideo.play();
+    myvideo.pause();
+    myvideo.play();
   	myvideo.src = "http://cdn-origin-discovery.digitalshowcase.piksel.com/trailers/2016/09/15/10/35/1b_RM_CO3_HDR_Clip1_22M.mp4";
     myvideo.autoplay = true;
   	myvideo.currentTime = 0;
