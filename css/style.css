@@ -43,11 +43,11 @@ ul {
 ul .inner {
   padding-left: 1em;
   overflow: hidden;
-  display: none;
+
 }
 ul .first {
   overflow: hidden;
-  display: none;
+
 }
 ul .inner.show {
   /*display: block;*/
