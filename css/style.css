@@ -13,7 +13,6 @@ p {
   font-size: 1.1em;
   margin-bottom: 2em;
 }
-#myvideo {max-width: 720px;}
 
 .accordion {
   min-width: 300px;
@@ -92,11 +91,7 @@ div.shadow{
 	top:100px;
   max-width:400px;
 }
-video {
-  border-radius:0.5em;
-  border:5px solid #CFD8DC;
-  background:#CFD8DC;
-}
+
 .info {
   position:fixed;
   bottom:0px;
