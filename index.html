@@ -2,51 +2,75 @@
 <html >
   <head>
     <meta charset="UTF-8">
-    <title>HTML5 Video Interface with Chapters</title>
+    <title>Angular Crud Firebase</title>
     
+    
+    
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+
         <link rel="stylesheet" href="css/style.css">
+
+    
+    
     
   </head>
 
   <body>
 
-    <div class="accordion">
-  <!--<h1>Video Title Here</h1>-->
-    <ul class="first">
-      <li><button id="chapt1">1b_RM_CO3_HDR_Clip1_22M.mp4</button></li>
-          <li><button id="chapt2">1a_RM_SDR_Clip1.mxf</button></li>
-          <li><button id="chapt3">1a_RM_SDR_Clip2.mxf</button></li>
-  </ul>
-  <!--<img src="http://demo.thesisawesome.com/site/blogskin/files/2012/10/your-logo-here.png" class="logo">-->
-  <img src="http://discovery.digitalshowcase.piksel.com/i/brand-logo.png" class="logo">
-</div>
-<div class="accordion2">
-  <video id="myvideo" width="720" controls>
-      <source src="http://cdn-origin-discovery.digitalshowcase.piksel.com/trailers/2015/nightmares_9_full_newffmpegversion.mp4" type="video/mp4"></source>
+    <html>
+
+<head>
+
+</head>
+
+<body ng-app="app" ng-controller="appCtrl">
+ <h1><a href="" class="logo">Home</a>{{title}}</h1>
+<!--   <form>
+    <input class="form-control" type="text" ng-model="app.src" placeholder="src" />
+    <input type="text" class="form-control" ng-model="app.title" placeholder="title" />
+
+    <select class="form-control" ng-model="app.category" ng-options="value for value in categories">
+      
+    </select>
+    <input class="form-control" type="string" ng-model="app.thumbnail" placeholder="thumbnail" />
+    <button class="form-control btn btn-primary type=" button " ng-click="add() ">+</button>
+    </form> -->
+  <select class="form-control" ng-model="session" ng-options="value.id for value in sessions" ng-change="changedValue(session)">
+      
+    </select>
+    <table class="table table-striped table-hover  " style="width:100% ">
+      <thead>
+        <th>Src</th>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Thumbnail</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="value in DB " ng-click="play(value) ">
+          <td>{{value.src}}</td>
+          <td>{{value.title}}</td>
+          <td>{{value.category}}</td>
+          <td><img <img ng-src="{{value.thumbnail}}"/></td>
+     
+        </tr>
+      </tbody>
+    </table>
+    <video id="myvideo" width="100%" controls>
+      <source src="" type="video/mp4"></source>
       Your browser does not support HTML5 video.
   </video>
-<div class="shadow"></div>
-</div>
-<div style="clear:both"></div>
-<div class="info">
-  Copyright &copy;
-  <script type="text/javascript">
-    var d = new Date()
-    document.write(d.getFullYear())
-  </script>
-  <a href="http://www.piksel.com" target="_blank">Piksel Inc.</a>
-</div>
-<!--<a href="#" onclick="MyWindow=window.open('http://codepen.io/npsantini/full/ogJBjq/','MyWindow','toolbar=no,location=no,directories=no,status=no, menubar=no,scrollbars=no,resizable=no,width=770,height=380'); return false;">Open Video In New Tab</a>-->
-<!--[if gte IE 9]>
-  <style type="text/css">
-    .gradient {
-       filter: none;
-    }
-  </style>
-<![endif]-->
-  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-  <link href="http://vjs.zencdn.net/4.3/video-js.css" rel="stylesheet">
-  <script src="http://vjs.zencdn.net/4.3/video.js"></script>
-  <script src="js/index.js"></script>
+ <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js "></script>
+ <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js "></script>
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/0.9.2/angularfire.min.js "></script>
+  </body>
+</html>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+
+        <script src="js/index.js"></script>
+
+    
+    
+    
   </body>
 </html>

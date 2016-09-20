@@ -1,80 +1,83 @@
-$('.toggle, .inner-toggle').click(function(e) {
-  	e.preventDefault();
-    var $this = $(this);
-    if ($this.next()[0].classList.contains('show')) {
-        $this.next().removeClass('show');
-        $this.next().slideUp(350);
-    } else {
-        $this.parent().parent().find('li .inner, li .first').removeClass('show');
-        $this.parent().parent().find('li .inner, li .first').slideUp(350);
-        $this.next().toggleClass('show');
-        $this.next().slideToggle(350);
+var app = angular.module('app', ["firebase"])
+  .controller('appCtrl', function($scope, $firebase) {
+
+    var ref = new Firebase("https://discovery4kassets.firebaseio.com/assets");
+    var sync = $firebase(ref);
+
+    var refSessions = new Firebase("https://discovery4kassets.firebaseio.com/sessions");
+    var session = $firebase(refSessions);
+
+    $scope.sessions = session.$asArray();
+    $scope.DB = sync.$asArray();
+    var unwatch = $scope.sessions.$watch(function() {
+      console.log("data changed!");
+      if ($scope.playSession) {
+        console.log($scope.playSession);
+        var now = new Date().getTime();
+        if ($scope.playSession.time + 60 * 1000 > now) $scope.setVideoSrc($scope.playSession.active);
+      }
+    });
+    $scope.$on("$destroy", function() {
+      if (unwatch) {
+        console.log("removing watch!");
+        unwatch();
+      }
+    });
+    $scope.title = 'Demo Discovery HDR/SDR';
+    $scope.categories = ['HDR', 'SDR']
+
+    $scope.app = {
+      src: '',
+      title: '',
+      category: '',
+      thumbnail: ''
     }
-});
 
-var myvideo = document.getElementById('myvideo'),
-    playbutton = document.getElementById('playme'),
-    restart = document.getElementById('restart'),
-    chapt1 = document.getElementById('chapt1'),
-    chapt2 = document.getElementById('chapt2'),
-    chapt3 = document.getElementById('chapt3');
+    $scope.add = function() {
+      $scope.DB.$add($scope.app);
+      $scope.app = {
+        src: '',
+        title: '',
+        category: '',
+        thumbnail: ''
+      }
 
-chapt1.addEventListener("click", function (event) {
-    event.preventDefault();
-    myvideo.play();
-    myvideo.pause();
-    myvideo.play();
-  	myvideo.src = "http://cdn-origin-discovery.digitalshowcase.piksel.com/trailers/2016/09/15/10/35/1b_RM_CO3_HDR_Clip1_22M.mp4";
-    myvideo.autoplay = true;
-  	myvideo.currentTime = 0;
-}, false);
+    }
 
-chapt2.addEventListener("click", function (event) {
-    event.preventDefault();
-    myvideo.src="http://cdn-origin-discovery.digitalshowcase.piksel.com/trailers/2016/09/16/08/34/1a_RM_SDR_Clip1_22M.mp4"
-    myvideo.currentTime = 0;
-    myvideo.play();
-}, false);
+    $scope.edit = function(value) {
+      $scope.app = value
+    }
+    $scope.delete = function(item) {
+      $scope.DB.$remove(item)
+    }
+    $scope.changedValue = function(item) {
+      $scope.playSession = item;
+    }
+    $scope.setVideoSrc = function(src) {
+      var myvideo = document.getElementById('myvideo');
+      if (!myvideo.paused) {
 
-chapt3.addEventListener("click", function (event) {
-    event.preventDefault();
-    myvideo.src="http://cdn-origin-discovery.digitalshowcase.piksel.com/trailers/2016/09/16/13/45/1a_RM_SDR_Clip2_22M.mp4";
-    myvideo.currentTime = 0;
-    myvideo.play();
-}, false);
-
-// only in to demonstrate video
-playbutton.addEventListener("click", function () {
-    if (myvideo.paused) {
-        myvideo.play();
-    } else {
         myvideo.pause();
+      }
+      myvideo.src = src;
+      myvideo.play();
     }
-}, false);
+    $scope.play = function(item) {
+      console.log(JSON.stringify(item));
+      $scope.setVideoSrc(item.src);
+      if ($scope.playSession) {
+        $scope.playSession.active = item.src;
+        $scope.playSession.time = new Date().getTime();
+        console.log($scope.playSession);
+        $scope.sessions.$save($scope.playSession).then(function() {
+          console.log("updated playing url");
+        });
+      }
+    }
 
-restart.addEventListener("click", function (event) {
-    event.preventDefault();
-    myvideo.play();
-    myvideo.pause();
-    myvideo.currentTime = 0;
-    myvideo.play();
-}, false);
-
-
-$(document).ready(function() {
-    var audioElement = document.createElement('audio');
-    audioElement.setAttribute('src', 'http://www.freesfx.co.uk/rx2/mp3s/2/2706_1329133089.mp3');
-   
-  $.get();
-    audioElement.addEventListener("load", function() {
-      audioElement.play();
-    }, true);
-  
-    $('.toggle').click(function() {
-      audioElement.play();
-    });
-  
-    $('.inner-toggle').click(function() {
-      audioElement.play();
-    });
-});
+  });
+app.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}]);
