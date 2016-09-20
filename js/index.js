@@ -44,6 +44,7 @@ var app = angular.module('app', ["firebase"])
 
     }
 
+
     $scope.edit = function(value) {
       $scope.app = value
     }
@@ -76,8 +77,15 @@ var app = angular.module('app', ["firebase"])
     }
 
   });
-app.filter('trusted', ['$sce', function ($sce) {
+
+    app.filter('trusted', ['$sce', function ($sce) {
     return function(url) {
         return $sce.trustAsResourceUrl(url);
+        };
+    }]);
+    console.log = (function (old_function, div_log) { 
+    return function (text) {
+        old_function(text);
+        div_log.innerHTML += "<p>"+text+"</p>";
     };
-}]);
+} (console.log.bind(console), document.getElementById("logs")));
