@@ -44,7 +44,38 @@ var app = angular.module('app', ["firebase"])
 
     }
 
-
+    $scope.$on('$viewContentLoaded', function() {
+        var myvideo = document.getElementById('myvideo');
+        var media_events = new Array();
+        media_events["loadstart"] = 0;
+        media_events["progress"] = 0;
+        media_events["suspend"] = 0;
+        media_events["abort"] = 0;
+        media_events["error"] = 0;
+        media_events["emptied"] = 0;
+        media_events["stalled"] = 0;
+        media_events["loadedmetadata"] = 0;
+        media_events["loadeddata"] = 0;
+        media_events["canplay"] = 0;
+        media_events["canplaythrough"] = 0;
+        media_events["playing"] = 0;
+        media_events["waiting"] = 0;
+        media_events["seeking"] = 0;
+        media_events["seeked"] = 0;
+        media_events["ended"] = 0;
+        media_events["durationchange"] = 0;
+        media_events["timeupdate"] = 0;
+        media_events["play"] = 0;
+        media_events["pause"] = 0;
+        media_events["ratechange"] = 0;
+        media_events["resize"] = 0;
+        media_events["volumechange"] = 0;
+        for (key in media_events) {
+        
+            myvideo.addEventListener(key, function(event){console.log(event);}, false);
+        
+        }
+    });
     $scope.edit = function(value) {
       $scope.app = value
     }
