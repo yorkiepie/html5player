@@ -71,7 +71,7 @@ var app = angular.module('app', ["firebase"])
         media_events["resize"] = 0;
         media_events["volumechange"] = 0;
         for (key in media_events) {
-        
+            console.log("adding event listener "+key);
             myvideo.addEventListener(key, function(event){console.log(event);}, false);
         
         }
