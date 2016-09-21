@@ -10,3 +10,6 @@
     background: url(http://discovery.digitalshowcase.piksel.com/i/brand-logo.png) left center no-repeat;
     background-size: 75% auto;
 }
+#logs {
+ overflow:auto;
+}
