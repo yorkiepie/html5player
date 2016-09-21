@@ -122,8 +122,13 @@ var app = angular.module('app', ["firebase"])
         var msg;
         if (typeof text === 'string' || text instanceof String)
             msg = text;
-        else
+        else{
+            var result = Object.create(text);
+            for(var key in result) {
+                msg += ","+key+":"+result[key];
+            }
             msg = JSON.stringify(text);
+        }
         div_log.innerHTML += "<p>"+new Date()+" : "+msg+"</p>";
     };
 } (console.log.bind(console), document.getElementById("logs")));
