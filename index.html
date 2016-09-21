@@ -49,7 +49,7 @@
         <tr ng-repeat="value in DB " ng-click="play(value) ">
           <td>{{value.src}}</td>
           <td>{{value.title}}</td>
-          <td>{{value.category}}</td>
+          <td><span ng-class="value.category=='HDR'?'label label-primary':'label label-warning'">{{value.category}}</span></td>
           <td><img <img ng-src="{{value.thumbnail}}"/></td>
      
         </tr>
