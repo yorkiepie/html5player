@@ -43,8 +43,9 @@ var app = angular.module('app', ["firebase"])
       }
 
     }
+    
 
-    $scope.$on('$viewContentLoaded', function() {
+    angular.element(document).ready(function() {
         console.log("adding video events ");
         var myvideo = document.getElementById('myvideo');
         var media_events = new Array();
