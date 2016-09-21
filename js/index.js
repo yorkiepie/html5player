@@ -73,7 +73,7 @@ var app = angular.module('app', ["firebase"])
         media_events["resize"] = 0;
         media_events["volumechange"] = 0;
         for (key in media_events) {
-            console.log("adding event listener "+key);
+           
             myvideo.addEventListener(key, function(event){console.log(event);}, false);
         
         }
@@ -119,6 +119,11 @@ var app = angular.module('app', ["firebase"])
     console.log = (function (old_function, div_log) { 
     return function (text) {
         old_function(text);
-        div_log.innerHTML += "<p>"+text+"</p>";
+        var msg;
+        if (typeof text === 'string' || text instanceof String)
+            msg = text;
+        else
+            msg = JSON.stringify(text);
+        div_log.innerHTML += "<p>"+new Date()+" : "+msg+"</p>";
     };
 } (console.log.bind(console), document.getElementById("logs")));
