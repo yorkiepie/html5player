@@ -1,7 +1,7 @@
 var app = angular.module('app', ["firebase"])
   .controller('appCtrl', function($scope, $firebase) {
 
-    var ref = new Firebase("https://discovery4kassets.firebaseio.com/assets");
+    var ref = new Firebase("https://discovery4kassets.firebaseio.com/showcase/items");
     var sync = $firebase(ref);
 
     var refSessions = new Firebase("https://discovery4kassets.firebaseio.com/sessions");
@@ -97,8 +97,8 @@ var app = angular.module('app', ["firebase"])
       myvideo.play();
     }
     $scope.play = function(item) {
-      console.log(JSON.stringify(item));
-      $scope.setVideoSrc(item.src);
+      // console.log(JSON.stringify(item));
+      $scope.setVideoSrc(item.trailer_items[0].url);
       if ($scope.playSession) {
         $scope.playSession.active = item.src;
         $scope.playSession.time = new Date().getTime();
